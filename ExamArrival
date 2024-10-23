@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class ExamArrival {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int examHour = scanner.nextInt();
+        int examMinute = scanner.nextInt();
+        int arrivalHour = scanner.nextInt();
+        int arrivalMinute = scanner.nextInt();
+
+        int examTime = examHour * 60 + examMinute;
+        int arrivalTime = arrivalHour * 60 + arrivalMinute;
+
+        // Calculating the difference in minutes
+        int difference = arrivalTime - examTime;
+
+        // Determine arrival status
+        if (difference < -30) {
+            System.out.println("Early");
+            // Format and print the time difference in hours and minutes
+            int earlyMinutes = -difference;
+            int earlyHours = earlyMinutes / 60;
+            earlyMinutes %= 60;
+            if (earlyHours > 0) {
+                System.out.printf("%d:%02d hours before the start%n", earlyHours, earlyMinutes);
+            } else {
+                System.out.printf("%d minutes before the start%n", earlyMinutes);
+            }
+        } else if (difference <= 0) {
+            System.out.println("On time");
+            if (difference != 0) {
+                System.out.printf("%d minutes before the start%n", -difference);
+            }
+        } else {
+            System.out.println("Late");
+            // Format and print the time difference in hours and minutes
+            int lateMinutes = difference;
+            int lateHours = lateMinutes / 60;
+            lateMinutes %= 60;
+            if (lateHours > 0) {
+                System.out.printf("%d:%02d hours after the start%n", lateHours, lateMinutes);
+            } else {
+                System.out.printf("%d minutes after the start%n", lateMinutes);
+            }
+        }
+
+        scanner.close();
+    }
+}
